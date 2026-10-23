@@ -1,135 +1,194 @@
+
 /**
- * SereneBloom - Gemini AI Chat Backend Endpoint
- * Deployable on Vercel Serverless Functions (/api/chat)
- * Protects Gemini API Key and enforces empathetic Vietnamese high school psychological guidance.
+ * SereneBloom - Gemini AI Chat Backend
+ * Vercel Serverless Function: /api/chat
+ *
+ * API key được lưu trong Vercel Environment Variables:
+ * GEMINI_API_KEY
  */
 
+const SYSTEM_INSTRUCTION = `
+Bạn là SereneBloom AI, người bạn đồng hành chăm sóc sức khỏe
+tinh thần dành cho học sinh THPT.
+
+NGUYÊN TẮC:
+1. Luôn trả lời bằng tiếng Việt tự nhiên, ấm áp, thấu cảm.
+2. Xưng hô "mình" và "bạn".
+3. Lắng nghe và công nhận cảm xúc của người dùng.
+4. Hỗ trợ các chủ đề như áp lực học tập, thi cử, gia đình,
+   tình bạn, cảm xúc và những khó khăn tuổi mới lớn.
+5. Không chẩn đoán bệnh tâm thần, không tự nhận là bác sĩ
+   hoặc chuyên gia tâm lý.
+6. Đưa ra gợi ý nhỏ, thực tế và dễ thực hiện khi phù hợp.
+7. Không phán xét, không xem nhẹ nỗi buồn của người dùng.
+8. Trả lời ngắn gọn, rõ ràng, chia đoạn dễ đọc.
+9. Không khẳng định mình là con người hoặc thay thế hỗ trợ
+   từ gia đình, thầy cô hay chuyên viên tâm lý.
+10. Nếu người dùng đang gặp nguy hiểm hoặc có nguy cơ tự làm
+    tổn thương bản thân, hãy phản hồi bình tĩnh, quan tâm,
+    khuyến khích họ đến ngay bên người lớn đáng tin cậy và
+    tìm trợ giúp khẩn cấp tại địa phương khi cần.
+11. Tại Việt Nam, có thể hướng dẫn liên hệ Tổng đài bảo vệ
+    trẻ em 111 hoặc cấp cứu 115 trong tình huống khẩn cấp.
+12. Trả lời đúng nội dung câu hỏi, không chỉ lặp lại các
+    câu trả lời mẫu. Nếu chưa đủ thông tin, hãy hỏi thêm.
+`;
+
+// Có thể đổi sang model khác nếu model này không được
+// hỗ trợ trong Google AI Studio của tài khoản bạn.
+const GEMINI_MODEL = "gemini-2.5-flash";
+
 export default async function handler(req, res) {
-  // CORS configuration
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed. Only POST is accepted.' });
+  // Chỉ chấp nhận POST.
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    return res.status(405).json({
+      error: "Method not allowed. Please use POST."
+    });
   }
 
   try {
-    const { message, history = [] } = req.body || {};
-
-    if (typeof message !== 'string' || !message.trim()) {
-      return res.status(400).json({ error: 'Message cannot be empty.' });
-    }
-
-    if (message.length > 3000) {
-      return res.status(400).json({ error: 'Tin nhắn quá dài (tối đa 3000 ký tự).' });
-    }
-
     const apiKey = process.env.GEMINI_API_KEY;
 
-    // Safety & Crisis Detection Prompt for Vietnam High Schoolers
-    const systemInstruction = `
-Bạn là SereneBloom AI — người bạn đồng hành chăm sóc sức khỏe tinh thần ấm áp, dịu dàng dành cho học sinh THPT (từ 15-18 tuổi).
-Nguyên tắc tương tác:
-1. Luôn phản hồi bằng tiếng Việt tự nhiên, ấm áp, thấu cảm, xưng hô "mình" và "bạn".
-2. Lắng nghe sâu sắc, công nhận cảm xúc của bạn học sinh (áp lực điểm số, thi cử, kỳ vọng gia đình, mối quan hệ bạn bè, tuổi mới lớn). Không phán xét, không gạt bỏ cảm xúc.
-3. Tuyệt đối KHÔNG chẩn đoán bệnh lý tâm thần hoặc tự nhận là bác sĩ/chuyên gia tâm lý.
-4. Gợi ý các bước tự chăm sóc đơn giản, dễ làm ngay: hít thở sâu, uống nước ấm, nghỉ ngơi 5 phút, nghe nhạc dịu, viết nhật ký.
-5. Nếu nhận thấy bạn học sinh đang ở trong trạng thái khủng hoảng nghiêm trọng, kiệt quệ, có ý nghĩ tự hại hoặc bế tắc cùng cực:
-   - Thể hiện sự trân trọng và lo lắng chân thành cho sự an toàn của bạn.
-   - Nhắc nhở dịu dàng rằng bạn không đơn độc và việc tìm kiếm sự trợ giúp từ người lớn đáng tin cậy (cha mẹ, thầy cô, chuyên viên tư vấn học đường) là bước đi dũng cảm.
-   - Cung cấp thông tin đường dây nóng hỗ trợ miễn phí tại Việt Nam:
-     * Tổng đài Quốc gia Bảo vệ Trẻ em & Thanh thiếu niên: 111 (miễn phí 24/7)
-     * Đường dây nóng Ngày Mai (Hỗ trợ người trầm cảm & khủng hoảng tâm lý): 096 306 1414
-     * Cấp cứu khẩn cấp: 115.
-6. Giữ câu trả lời súc tích, ngắt đoạn rõ ràng, không nói quá dài khiến người đọc thêm mệt mỏi.
-`;
+    if (!apiKey) {
+      console.error("Missing GEMINI_API_KEY");
 
-    // Format chat history for Gemini API
-    const contents = [
-      {
-        role: "user",
-        parts: [{ text: systemInstruction }]
-      },
-      {
-        role: "model",
-        parts: [{ text: "Mình đã hiểu và sẵn sàng đồng hành, lắng nghe các bạn học sinh với sự chân thành, ấm áp nhất." }]
-      }
-    ];
-
-    // Add conversation history
-    if (Array.isArray(history)) {
-      history.filter(msg => msg && typeof msg.content === 'string').slice(-10).forEach(msg => {
-        if (msg.role && msg.content) {
-          contents.push({
-            role: msg.role === 'user' ? 'user' : 'model',
-            parts: [{ text: msg.content }]
-          });
-        }
+      return res.status(503).json({
+        error:
+          "Gemini chưa được cấu hình. Hãy kiểm tra GEMINI_API_KEY trong Vercel."
       });
     }
 
-    // Add current user message
-    contents.push({
-      role: "user",
-      parts: [{ text: message }]
-    });
+    const body = req.body || {};
+    const message = body.message;
+    const history = body.history;
 
-    // Do not pretend a scripted response is a live Gemini answer.
-    if (!apiKey) {
-      console.error("GEMINI_API_KEY environment variable is not configured.");
-      return res.status(503).json({ error: 'Gemini chưa được cấu hình. Hãy thêm GEMINI_API_KEY trong Vercel → Settings → Environment Variables rồi triển khai lại.' });
+    if (
+      typeof message !== "string" ||
+      !message.trim()
+    ) {
+      return res.status(400).json({
+        error: "Vui lòng nhập tin nhắn."
+      });
     }
 
-    // Use gemini-3.5-flash-lite (fast, responsive, latest Google AI release)
+    if (message.length > 3000) {
+      return res.status(400).json({
+        error: "Tin nhắn tối đa 3000 ký tự."
+      });
+    }
 
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${encodeURIComponent(apiKey)}`;
+    // Xử lý lịch sử trò chuyện.
+    const contents = [];
 
-    const geminiRes = await fetch(geminiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    if (Array.isArray(history)) {
+      history
+        .filter((item) => {
+          return (
+            item &&
+            typeof item.content === "string" &&
+            item.content.trim() &&
+            ["user", "ai", "model"].includes(item.role)
+          );
+        })
+        .slice(-10)
+        .forEach((item) => {
+          contents.push({
+            role:
+              item.role === "user" ? "user" : "model",
+            parts: [
+              {
+                text: item.content.slice(0, 3000)
+              }
+            ]
+          });
+        });
+    }
+
+    // Tin nhắn hiện tại chỉ được thêm một lần.
+    contents.push({
+      role: "user",
+      parts: [
+        {
+          text: message.trim()
+        }
+      ]
+    });
+
+    const url =
+      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": apiKey
+      },
       body: JSON.stringify({
         systemInstruction: {
-          parts: [{ text: systemInstruction }]
+          parts: [
+            {
+              text: SYSTEM_INSTRUCTION
+            }
+          ]
         },
         contents,
         generationConfig: {
           temperature: 0.7,
-          topK: 40,
-          topP: 0.95,
           maxOutputTokens: 800
         }
       })
     });
 
-    if (!geminiRes.ok) {
-      const errData = await geminiRes.text();
-      console.error("Gemini API Error:", errData);
+    const result = await response.json();
+
+    // Không trả câu trả lời giả khi API gặp lỗi.
+    if (!response.ok) {
+      console.error(
+        "Gemini API error:",
+        response.status,
+        result?.error?.status || "Unknown error",
+        result?.error?.message || "No error details"
+      );
+
       return res.status(502).json({
-        error: 'Gemini API từ chối yêu cầu hoặc model hiện không khả dụng. Kiểm tra API key, quyền truy cập và hạn mức trong Google AI Studio.'
+        error:
+          "Gemini chưa phản hồi thành công. Hãy kiểm tra model, API key, quyền truy cập và hạn mức."
       });
     }
 
-    const data = await geminiRes.json();
-    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Mình luôn ở đây lắng nghe bạn. Bạn hãy chia sẻ thêm nhé!";
+    const reply = (
+      result?.candidates?.[0]?.content?.parts || []
+    )
+      .map((part) => part.text || "")
+      .join("")
+      .trim();
 
-    return res.status(200).json({ reply: replyText, mode: 'gemini_live' });
+    if (!reply) {
+      console.error(
+        "Gemini returned no text",
+        result?.promptFeedback?.blockReason || "No text"
+      );
 
+      return res.status(502).json({
+        error:
+          "Gemini không trả về nội dung. Bạn thử gửi lại tin nhắn nhé."
+      });
+    }
+
+    return res.status(200).json({
+      reply,
+      mode: "gemini_live"
+    });
   } catch (error) {
-    console.error("Chat Handler Exception:", error);
+    console.error(
+      "Chat backend error:",
+      error?.message || "Unknown error"
+    );
+
     return res.status(500).json({
-      error: "Internal server error",
-      reply: "Mình gặp chút trục trặc khi kết nối, nhưng mình vẫn luôn ở đây cùng bạn. Bạn có muốn hít thở một hơi thật sâu rồi thử lại không?"
+      error:
+        "Máy chủ gặp lỗi khi xử lý tin nhắn. Vui lòng thử lại."
     });
   }
 }
-
