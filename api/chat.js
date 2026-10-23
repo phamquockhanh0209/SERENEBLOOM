@@ -34,9 +34,8 @@ NGUYÊN TẮC:
     câu trả lời mẫu. Nếu chưa đủ thông tin, hãy hỏi thêm.
 `;
 
-// Có thể đổi sang model khác nếu model này không được
-// hỗ trợ trong Google AI Studio của tài khoản bạn.
-const GEMINI_MODEL = "gemini-2.5-flash";
+// Danh sách model tương thích được hỗ trợ tốt nhất trên tài khoản hiện tại
+const GEMINI_MODELS = ["gemini-3.5-flash", "gemini-3.5-flash-lite"];
 
 export default async function handler(req, res) {
   // Chỉ chấp nhận POST.
@@ -115,66 +114,54 @@ export default async function handler(req, res) {
       ]
     });
 
-    const url =
-      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+    let reply = "";
+    let lastError = null;
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-goog-api-key": apiKey
-      },
-      body: JSON.stringify({
-        systemInstruction: {
-          parts: [
-            {
-              text: SYSTEM_INSTRUCTION
+    for (const model of GEMINI_MODELS) {
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": apiKey
+          },
+          body: JSON.stringify({
+            systemInstruction: {
+              parts: [{ text: SYSTEM_INSTRUCTION }]
+            },
+            contents,
+            generationConfig: {
+              temperature: 0.7,
+              maxOutputTokens: 800
             }
-          ]
-        },
-        contents,
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 800
+          })
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          reply = (result?.candidates?.[0]?.content?.parts || [])
+            .map((part) => part.text || "")
+            .join("")
+            .trim();
+          if (reply) break;
+        } else {
+          lastError = result?.error?.message || `HTTP ${response.status}`;
+          console.warn(`Model ${model} failed, trying fallback:`, lastError);
         }
-      })
-    });
-
-    const result = await response.json();
-
-    // Không trả câu trả lời giả khi API gặp lỗi.
-    if (!response.ok) {
-      console.error(
-        "Gemini API error:",
-        response.status,
-        result?.error?.status || "Unknown error",
-        result?.error?.message || "No error details"
-      );
-
-      return res.status(502).json({
-        error:
-          "Gemini chưa phản hồi thành công. Hãy kiểm tra model, API key, quyền truy cập và hạn mức."
-      });
+      } catch (err) {
+        lastError = err?.message;
+        console.warn(`Model ${model} request error, trying fallback:`, lastError);
+      }
     }
-
-    const reply = (
-      result?.candidates?.[0]?.content?.parts || []
-    )
-      .map((part) => part.text || "")
-      .join("")
-      .trim();
 
     if (!reply) {
-      console.error(
-        "Gemini returned no text",
-        result?.promptFeedback?.blockReason || "No text"
-      );
-
+      console.error("Gemini failed for all models. Last error:", lastError);
       return res.status(502).json({
-        error:
-          "Gemini không trả về nội dung. Bạn thử gửi lại tin nhắn nhé."
+        error: "Gemini chưa phản hồi thành công. Bạn vui lòng thử lại sau giây lát."
       });
     }
+
 
     return res.status(200).json({
       reply,

@@ -304,9 +304,20 @@ function scrollToBottom() {
   }
 }
 
-function formatRelativeTime(dateStr) {
-  if (!dateStr) return '';
-  const diff = Date.now() - new Date(dateStr).getTime();
+function formatRelativeTime(dateVal) {
+  if (!dateVal) return '';
+  let d;
+  if (typeof dateVal?.toDate === 'function') {
+    d = dateVal.toDate();
+  } else if (typeof dateVal === 'object' && dateVal?.seconds) {
+    d = new Date(dateVal.seconds * 1000);
+  } else {
+    d = new Date(dateVal);
+  }
+  const time = d.getTime();
+  if (Number.isNaN(time)) return '';
+
+  const diff = Math.max(0, Date.now() - time);
   const mins = Math.floor(diff / 60000);
   if (mins < 1) return 'Vừa xong';
   if (mins < 60) return `${mins} phút trước`;
