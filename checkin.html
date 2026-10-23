@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhật Ký Cảm Xúc — SereneBloom</title>
+  <meta name="description" content="Nhật ký cảm xúc học đường SereneBloom - Ghi nhận tâm trạng, giải tỏa muộn phiền và vẽ cảm xúc của chính bạn.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.png">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/checkin.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Desktop Left Sidebar -->
+    <aside class="sidebar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <img src="assets/images/logo.png" alt="SereneBloom Logo" width="28" height="28">
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">SereneBloom</span>
+          <span class="brand-tagline">Tâm trí an yên • Nở rộ</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link" data-page="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Trang chủ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="chat.html" class="nav-link" data-page="chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Trò chuyện</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="checkin.html" class="nav-link active" data-page="checkin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span>Check-in</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="healing.html" class="nav-link" data-page="healing">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+              <line x1="9" y1="9" x2="9.01" y2="9"></line>
+              <line x1="15" y1="9" x2="15.01" y2="9"></line>
+            </svg>
+            <span>Góc nhỏ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="profile.html" class="nav-link" data-page="profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Hồ sơ</span>
+          </a>
+        </li>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="sidebar-user">
+          <div class="avatar-initial user-avatar-initial">H</div>
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name user-display-name">Bạn</span>
+            <span class="sidebar-user-email user-display-email">...</span>
+          </div>
+        </a>
+        <button class="sidebar-logout-btn logout-trigger" title="Đăng xuất">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 class="topbar-title">Nhật ký cảm xúc 📝</h1>
+          <span class="topbar-date topbar-date-display">...</span>
+        </div>
+        <div class="topbar-right">
+          <div class="streak-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+            </svg>
+            <span class="streak-display-count">Chuỗi 0 ngày</span>
+          </div>
+          <a href="profile.html" class="avatar-initial user-avatar-initial">H</a>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <div class="checkin-container">
+          <!-- 1. Checkin Form Section -->
+          <div class="checkin-form-card">
+            <div class="checkin-form-header">
+              <h2>Nhật ký cảm xúc của bạn</h2>
+              <p class="subtitle">Viết ra những suy nghĩ chân thật giúp tâm trí bạn được giải phóng và an yên hơn.</p>
+            </div>
+
+            <form id="checkin-full-form">
+              <!-- Mood Selector -->
+              <div class="form-group">
+                <label class="form-label">Chọn trạng thái tâm trạng</label>
+                <div class="mood-selector" id="checkin-mood-selector">
+                  <div class="mood-option checkin-mood-option" data-mood="joy">
+                    <span class="mood-emoji">😄</span>
+                    <span class="mood-label">Rất vui</span>
+                  </div>
+                  <div class="mood-option checkin-mood-option selected" data-mood="good">
+                    <span class="mood-emoji">😊</span>
+                    <span class="mood-label">Tốt</span>
+                  </div>
+                  <div class="mood-option checkin-mood-option" data-mood="neutral">
+                    <span class="mood-emoji">😐</span>
+                    <span class="mood-label">Bình thường</span>
+                  </div>
+                  <div class="mood-option checkin-mood-option" data-mood="sad">
+                    <span class="mood-emoji">😢</span>
+                    <span class="mood-label">Buồn</span>
+                  </div>
+                  <div class="mood-option checkin-mood-option" data-mood="anxious">
+                    <span class="mood-emoji">😰</span>
+                    <span class="mood-label">Lo lắng</span>
+                  </div>
+                  <div class="mood-option checkin-mood-option" data-mood="tired">
+                    <span class="mood-emoji">🥱</span>
+                    <span class="mood-label">Mệt mỏi</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Date Picker Row -->
+              <div class="checkin-meta-row">
+                <div class="date-picker-wrap">
+                  <label for="checkin-date-input" style="font-size: var(--font-size-xs); font-weight: 600;">Ngày ghi nhận:</label>
+                  <input type="date" id="checkin-date-input" required>
+                </div>
+              </div>
+
+              <!-- Journal Textarea -->
+              <div class="form-group">
+                <label for="checkin-content-input" class="form-label">Tâm sự hôm nay</label>
+                <textarea 
+                  id="checkin-content-input" 
+                  rows="4" 
+                  placeholder="Hãy kể về những điều đã xảy ra với bạn hôm nay..."></textarea>
+              </div>
+
+              <!-- Submit -->
+              <div style="display: flex; justify-content: flex-end; margin-top: 1.25rem;">
+                <button type="submit" class="btn btn-primary" id="checkin-submit-btn">
+                  Lưu vào nhật ký
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- 2. "Thả bay muộn phiền" Activity -->
+          <div class="release-worries-card">
+            <div class="card-title">
+              <span>Hoạt động: Thả bay muộn phiền</span>
+              <span class="badge badge-pink">Giải tỏa cảm xúc</span>
+            </div>
+            <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-bottom: 1.25rem;">
+              Viết ra một điều tiêu cực, một nỗi sợ hoặc áp lực bạn muốn buông bỏ hôm nay, rồi nhìn quả bóng bay xa dần vào bầu trời.
+            </p>
+
+            <div class="balloon-stage">
+              <!-- Balloon Visual -->
+              <div class="balloon-svg-wrap" id="balloon-svg-wrap">
+                <svg viewBox="0 0 100 140" fill="none">
+                  <defs>
+                    <radialGradient id="balloonGrad" cx="35%" cy="35%" r="65%">
+                      <stop offset="0%" stop-color="#FFFFFF" />
+                      <stop offset="40%" stop-color="#F3DDE3" />
+                      <stop offset="100%" stop-color="#E5A6B6" />
+                    </radialGradient>
+                  </defs>
+                  <!-- Balloon Body -->
+                  <path d="M50 10 C20 10 10 35 10 60 C10 90 40 105 48 112 L46 116 L54 116 L52 112 C60 105 90 90 90 60 C90 35 80 10 50 10 Z" fill="url(#balloonGrad)" />
+                  <!-- Highlight shine -->
+                  <ellipse cx="35" cy="35" rx="10" ry="16" fill="#FFFFFF" opacity="0.6" transform="rotate(-25 35 35)" />
+                  <!-- String -->
+                  <path d="M50 116 Q45 125 55 132 T48 140" stroke="#7D8982" stroke-width="1.5" fill="none" />
+                </svg>
+              </div>
+
+              <!-- Input and Button -->
+              <div class="balloon-message-box">
+                <input 
+                  type="text" 
+                  id="balloon-worry-input" 
+                  placeholder="Điều bạn muốn buông bỏ (ví dụ: nỗi lo điểm kém, lời trêu chọc...)" 
+                  style="margin-bottom: 0.75rem; text-align: center;">
+                <button type="button" class="btn btn-soft-pink" id="balloon-release-btn">
+                Thả bay muộn phiền
+                </button>
+              </div>
+
+              <!-- Released Feedback -->
+              <div class="balloon-released-feedback" id="balloon-released-feedback">
+                <h4 style="color: var(--color-sage-dark); margin-bottom: 0.35rem;">Muộn phiền đã tan theo mây trời 🍃</h4>
+                <p style="font-size: var(--font-size-xs); color: var(--color-text-main); margin-bottom: 0.75rem;">
+                  Bạn đã rất dũng cảm khi nhận diện và buông bỏ điều này. Hãy hít một hơi thật sâu và cảm nhận sự nhẹ nhõm bên trong lồng ngực nhé!
+                </p>
+                <button class="btn btn-outline btn-sm" id="balloon-reset-btn">Thả bay điều khác</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Mood Drawing Canvas -->
+          <div class="canvas-card">
+            <div class="card-title">
+              <span>Vẽ cảm xúc của bạn 🎨</span>
+              <span class="badge badge-sage">Sáng tạo tự do</span>
+            </div>
+            <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-bottom: 1rem;">
+              Đôi khi ngôn từ không diễn tả hết được, hãy để những nét vẽ tự do giúp bạn bộc lộ cảm xúc.
+            </p>
+
+            <div class="canvas-toolbar">
+              <div class="canvas-colors">
+                <div class="color-swatch canvas-color-swatch active" data-color="#668B7B" style="background: #668B7B;" title="Xanh lá trầm"></div>
+                <div class="color-swatch canvas-color-swatch" data-color="#E898A8" style="background: #E898A8;" title="Hồng phấn"></div>
+                <div class="color-swatch canvas-color-swatch" data-color="#E09F3E" style="background: #E09F3E;" title="Cam ấm"></div>
+                <div class="color-swatch canvas-color-swatch" data-color="#5B8FA8" style="background: #5B8FA8;" title="Xanh da trời"></div>
+                <div class="color-swatch canvas-color-swatch" data-color="#846E9E" style="background: #846E9E;" title="Tím oải hương"></div>
+                <div class="color-swatch canvas-color-swatch" data-color="#35433D" style="background: #35433D;" title="Chì than"></div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <label style="font-size: var(--font-size-xs);">Cỡ cọ:</label>
+                <select id="canvas-brush-size" style="width: auto; padding: 0.35rem 0.65rem;">
+                  <option value="2">Mảnh</option>
+                  <option value="4" selected>Vừa</option>
+                  <option value="8">Dày</option>
+                </select>
+                <button class="btn btn-ghost btn-sm" id="canvas-clear-btn">Xóa vẽ</button>
+              </div>
+            </div>
+
+            <canvas id="mood-drawing-canvas" class="drawing-canvas"></canvas>
+          </div>
+
+          <!-- 4. Journal History List & Filters -->
+          <div class="card">
+            <div class="card-title">
+              <span>Lịch sử nhật ký</span>
+            </div>
+
+            <div class="journal-filter-bar">
+              <div class="journal-filter-pills">
+                <button class="filter-pill journal-filter-pill active" data-mood="all">Tất cả</button>
+                <button class="filter-pill journal-filter-pill" data-mood="joy">😄 Rất vui</button>
+                <button class="filter-pill journal-filter-pill" data-mood="good">😊 Tốt</button>
+                <button class="filter-pill journal-filter-pill" data-mood="neutral">😐 Bình thường</button>
+                <button class="filter-pill journal-filter-pill" data-mood="sad">😢 Buồn</button>
+                <button class="filter-pill journal-filter-pill" data-mood="anxious">😰 Lo lắng</button>
+                <button class="filter-pill journal-filter-pill" data-mood="tired">🥱 Mệt mỏi</button>
+              </div>
+
+              <div style="min-width: 220px;">
+                <input type="text" id="journal-search-input" placeholder="🔍 Tìm theo từ khóa..." style="padding: 0.45rem 0.85rem;">
+              </div>
+            </div>
+
+            <div class="journal-records-container" id="journal-records-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar (5 tabs) -->
+    <nav class="bottom-nav">
+      <ul class="bottom-nav-list">
+        <li class="bottom-nav-item">
+          <a href="index.html" class="bottom-nav-link" data-page="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Trang chủ</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="chat.html" class="bottom-nav-link" data-page="chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Trò chuyện</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="checkin.html" class="bottom-nav-link active" data-page="checkin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span>Check-in</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="healing.html" class="bottom-nav-link" data-page="healing">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+              <line x1="9" y1="9" x2="9.01" y2="9"></line>
+              <line x1="15" y1="9" x2="15.01" y2="9"></line>
+            </svg>
+            <span>Góc nhỏ</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="profile.html" class="bottom-nav-link" data-page="profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Hồ sơ</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- ES Modules -->
+  <script type="module">
+    import { initNavigation } from './js/navigation.js';
+    import { initCheckinPage } from './js/checkin.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initNavigation('checkin');
+      initCheckinPage();
+    });
+  </script>
+</body>
+</html>

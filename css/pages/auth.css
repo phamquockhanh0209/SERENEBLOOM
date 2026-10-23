@@ -1,0 +1,169 @@
+/* ==========================================================================
+   SERENEBLOOM - AUTHENTICATION PAGES (login, register, forgot-password)
+   ========================================================================== */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  background: var(--color-cream);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(226, 239, 233, 0.7) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(243, 221, 227, 0.6) 0px, transparent 50%);
+}
+
+.auth-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  max-width: 460px;
+  width: 100%;
+  padding: 2.5rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-brand-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-mint), var(--color-pink));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.auth-header h1 {
+  font-size: var(--font-size-xl);
+  margin-bottom: 0.35rem;
+}
+
+.auth-header p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-main);
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-input-wrap input {
+  padding-right: 2.5rem;
+}
+
+.input-icon-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+}
+
+.input-icon-btn:hover {
+  color: var(--color-text-main);
+}
+
+.form-row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+}
+
+.remember-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.remember-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.25rem 0;
+  color: var(--color-text-light);
+  font-size: var(--font-size-xs);
+}
+
+.auth-divider::before, .auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.auth-divider span {
+  padding: 0 0.75rem;
+}
+
+.demo-account-box {
+  background: var(--color-mint-light);
+  border: 1px dashed var(--color-sage);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  text-align: center;
+  font-size: var(--font-size-xs);
+  margin-top: 1rem;
+}
+
+.demo-account-box p {
+  color: var(--color-sage-dark);
+  margin-bottom: 0.5rem;
+  font-weight: var(--font-weight-medium);
+}

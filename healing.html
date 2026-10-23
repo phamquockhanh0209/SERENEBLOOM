@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Góc Nhỏ Thư Giãn — SereneBloom</title>
+  <meta name="description" content="Góc nhỏ thư giãn SereneBloom - Mini-game ghép tranh Bloom Jigsaw, bài tập hít thở 4-4-4-4, nhắc nhở tự chăm sóc và kiến thức tâm lý.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.png">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/healing.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Desktop Left Sidebar -->
+    <aside class="sidebar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <img src="assets/images/logo.png" alt="SereneBloom Logo" width="28" height="28">
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">SereneBloom</span>
+          <span class="brand-tagline">Tâm trí an yên • Nở rộ</span>
+        </div>
+      </a>
+
+      <nav class="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link" data-page="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Trang chủ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="chat.html" class="nav-link" data-page="chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Trò chuyện</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="checkin.html" class="nav-link" data-page="checkin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span>Check-in</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="healing.html" class="nav-link active" data-page="healing">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+              <line x1="9" y1="9" x2="9.01" y2="9"></line>
+              <line x1="15" y1="9" x2="15.01" y2="9"></line>
+            </svg>
+            <span>Góc nhỏ</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="profile.html" class="nav-link" data-page="profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Hồ sơ</span>
+          </a>
+        </li>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="profile.html" class="sidebar-user">
+          <div class="avatar-initial user-avatar-initial">H</div>
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name user-display-name">Bạn</span>
+            <span class="sidebar-user-email user-display-email">...</span>
+          </div>
+        </a>
+        <button class="sidebar-logout-btn logout-trigger" title="Đăng xuất">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <h1 class="topbar-title">Góc nhỏ dành cho bạn</h1>
+          <span class="topbar-date topbar-date-display">...</span>
+        </div>
+        <div class="topbar-right">
+          <div class="streak-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+            </svg>
+            <span class="streak-display-count">Chuỗi 0 ngày</span>
+          </div>
+          <a href="profile.html" class="avatar-initial user-avatar-initial">H</a>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <!-- Hero Introduction -->
+        <div class="healing-hero">
+          <h1>Dừng lại một chút, hít thở và yêu thương chính mình</h1>
+          <p class="subtitle">Không cần vội vã. Đây là khoảng thời gian hoàn toàn thuộc về bạn.</p>
+        </div>
+
+        <!-- Horizontal Category Filter Navigation -->
+        <div class="category-filter-nav">
+          <button class="category-tab active" data-category="all">Tất cả</button>
+          <button class="category-tab" data-category="jigsaw">Ghép tranh</button>
+          <button class="category-tab" data-category="breathing">Thư giãn</button>
+          <button class="category-tab" data-category="selfcare">Chăm sóc bản thân</button>
+          <button class="category-tab" data-category="psychology">Kiến thức tâm lý</button>
+        </div>
+
+        <div class="healing-sections">
+          <!-- SECTION 1: Bloom Jigsaw Mini-Game -->
+          <section class="healing-section" data-category="jigsaw">
+            <div class="section-heading">
+              <h2>Bloom Jigsaw — Ghép tranh chữa lành</h2>
+              <span class="badge badge-mint">Mini-game tương tác</span>
+            </div>
+
+            <div class="puzzle-wrapper">
+              <div class="puzzle-selector-bar">
+                <div class="puzzle-theme-pills">
+                  <span style="font-size: var(--font-size-xs); font-weight: 600; margin-right: 0.5rem; align-self: center;">Chọn tranh:</span>
+                  <button class="puzzle-pill active" data-theme="puzzle-1" aria-label="Hồ Sen Yên Bình" title="Hồ Sen Yên Bình">
+                    <img src="assets/images/hosen.webp" alt="Hồ Sen Yên Bình">
+                  </button>
+                  <button class="puzzle-pill" data-theme="puzzle-2" aria-label="Đồi Hoa Hoàng Hôn" title="Đồi Hoa Hoàng Hôn">
+                    <img src="assets/images/doihoa.jpg" alt="Đồi Hoa Hoàng Hôn">
+                  </button>
+                  <button class="puzzle-pill" data-theme="puzzle-3" aria-label="Góc Đọc Sách" title="Góc Đọc Sách">
+                    <img src="assets/images/gocdocsach.jpg" alt="Góc Đọc Sách">
+                  </button>
+                </div>
+
+                <button class="btn btn-secondary btn-sm" id="puzzle-reset-btn">
+                  <span>🔄</span> Chơi lại / Xáo mảnh
+                </button>
+              </div>
+
+              <!-- Progress Bar -->
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: var(--font-size-xs); margin-bottom: 0.35rem; color: var(--color-text-muted);">
+                  <span>Tiến trình ghép:</span>
+                  <span id="puzzle-progress-text" style="font-weight: 600; color: var(--color-sage-dark);">0/9 mảnh đã hoàn thành</span>
+                </div>
+                <div class="puzzle-progress-bar">
+                  <div class="puzzle-progress-fill" id="puzzle-progress-fill"></div>
+                </div>
+              </div>
+
+              <!-- Celebration Toast on complete -->
+              <div id="puzzle-celebration" style="display: none; background: #EAF6EE; border: 1.5px solid var(--color-success); border-radius: var(--radius-md); padding: 1rem; text-align: center; color: var(--color-success);">
+                <h3 style="margin-bottom: 0.25rem;">Tuyệt vời! Bạn đã hoàn thành bức tranh</h3>
+                <p style="font-size: var(--font-size-xs);">Hy vọng khoảnh khắc tập trung nhẹ nhàng này đã giúp tâm trí bạn được thư thái hơn.</p>
+              </div>
+
+              <!-- Board and Tray Container -->
+              <div class="puzzle-board-container">
+                <!-- Target 3x3 Grid -->
+                <div>
+                  <div style="text-align: center; font-size: var(--font-size-xs); font-weight: 600; margin-bottom: 0.5rem; color: var(--color-text-muted);">Khung ghép (Thả vào đây)</div>
+                  <div class="puzzle-grid" id="puzzle-grid"></div>
+                </div>
+
+                <!-- Tray containing scrambled pieces -->
+                <div>
+                  <div style="text-align: center; font-size: var(--font-size-xs); font-weight: 600; margin-bottom: 0.5rem; color: var(--color-text-muted);">Khay mảnh ghép (Kéo thả vào khung)</div>
+                  <div class="puzzle-tray" id="puzzle-tray"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 2: Guided Box Breathing -->
+          <section class="healing-section" data-category="breathing">
+            <div class="section-heading">
+              <h2>Bài tập hít thở 4-4-4-4 (Box Breathing)</h2>
+              <span class="badge badge-pink">Giải tỏa căng thẳng</span>
+            </div>
+
+            <div class="breathing-box">
+              <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); max-width: 500px;">
+                Kỹ thuật hít thở hộp kích hoạt hệ thần kinh phó giao cảm, giúp làm chậm nhịp tim và làm dịu cơn hoảng loạn trong vòng 2 phút.
+              </p>
+
+              <div class="breathing-visual-wrap">
+                <div class="breathing-outer-ring"></div>
+                <div class="breathing-circle" id="breathing-circle">
+                  <span class="breathing-prompt" id="breathing-prompt">Nhấn để bắt đầu</span>
+                  <span class="breathing-counter" id="breathing-counter">4</span>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" id="breathing-toggle-btn">
+              Bắt đầu hít thở
+              </button>
+            </div>
+          </section>
+
+          <!-- SECTION 3: Self-care Activities -->
+          <section class="healing-section" data-category="selfcare">
+            <div class="section-heading">
+              <h2>Thói quen chăm sóc bản thân</h2>
+              <span class="badge badge-sage">Hàng ngày</span>
+            </div>
+
+            <div class="selfcare-grid">
+              <!-- Water Intake Tracker -->
+              <div class="selfcare-card">
+                <div class="selfcare-card-top">
+                  <div class="selfcare-icon">💧</div>
+                  <div class="selfcare-info">
+                    <h3>Nhắc uống nước</h3>
+                    <p>Uống đủ nước giúp não bộ tỉnh táo và giảm bớt cơn đau đầu sau các tiết học căng thẳng.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 20-20-20 Eye Rest Rule -->
+              <div class="selfcare-card">
+                <div class="selfcare-card-top">
+                  <div class="selfcare-icon">👀</div>
+                  <div class="selfcare-info">
+                    <h3>Quy tắc 20-20-20</h3>
+                    <p>Cứ sau 20 phút nhìn sách hoặc màn hình điện thoại, hãy nhìn ra xa 20 feet (6 mét) trong 20 giây để mắt thư giãn.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gentle Stretching -->
+              <div class="selfcare-card">
+                <div class="selfcare-card-top">
+                  <div class="selfcare-icon">🧘‍♀️</div>
+                  <div class="selfcare-info">
+                    <h3>Giãn cơ nhẹ nhàng</h3>
+                    <p>Nghiêng nhẹ đầu sang hai bên, xoay tròn khớp vai 5 lần để giải tỏa sự co cứng vùng cổ sau giờ học.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gratitude Card -->
+              <div class="selfcare-card">
+                <div class="selfcare-card-top">
+                  <div class="selfcare-icon">🌟</div>
+                  <div class="selfcare-info">
+                    <h3>3 Điều biết ơn hôm nay</h3>
+                    <p>Dành 1 phút ghi nhận những điều tốt đẹp nhỏ bé đang hiện hữu quanh bạn.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECTION 4: Psychology Knowledge -->
+          <section class="healing-section" data-category="psychology">
+            <div class="section-heading">
+              <h2>Góc nhìn tâm lý học đường</h2>
+              <span class="badge badge-mint">Kiến thức thân thiện</span>
+            </div>
+
+            <div class="articles-grid">
+              <!-- Article 1 -->
+              <div class="article-card">
+                <div class="article-cover"><img src="assets/images/kvong.jpg" alt="Kỳ vọng trong học tập"></div>
+                <div class="article-body">
+                  <span class="article-tag">Thi cử & Kỳ vọng</span>
+                  <h3 class="article-title">Vượt qua áp lực thi cử và kỳ vọng gia đình</h3>
+                  <p class="article-snippet">Điểm số quan trọng, nhưng bạn còn quý giá hơn nhiều. Cùng tìm hiểu cách xây dựng ranh giới an toàn cho tâm lý trước mùa thi.</p>
+                  <span class="article-read-btn" data-article-id="art-1">Đọc bài viết &rarr;</span>
+                </div>
+              </div>
+
+              <!-- Article 2 -->
+              <div class="article-card">
+                <div class="article-cover"><img src="assets/images/apluc.jpg" alt="Áp lực và cảm xúc tuổi học trò"></div>
+                <div class="article-body">
+                  <span class="article-tag">Khoa học não bộ</span>
+                  <h3 class="article-title">Hiểu về cơn bão cảm xúc tuổi 17</h3>
+                  <p class="article-snippet">Vì sao đôi khi bạn thấy mình dễ nổi cáu hay buồn vu vơ? Khám phá cách bộ não tuổi mới lớn đang tái cấu trúc và thích nghi.</p>
+                  <span class="article-read-btn" data-article-id="art-2">Đọc bài viết &rarr;</span>
+                </div>
+              </div>
+
+              <!-- Article 3 -->
+              <div class="article-card">
+                <div class="article-cover"><img src="assets/images/5ngon.webp" alt="Kỹ thuật định tâm 5 ngón tay"></div>
+                <div class="article-body">
+                  <span class="article-tag">Chánh niệm thực hành</span>
+                  <h3 class="article-title">5 phút chánh niệm giải tỏa căng thẳng trước giờ kiểm tra</h3>
+                  <p class="article-snippet">Kỹ thuật định tâm 5 ngón tay giúp ổn định nhịp tim, lấy lại sự tập trung và giảm bớt cảm giác run sợ khi nhận đề thi.</p>
+                  <span class="article-read-btn" data-article-id="art-3">Đọc bài viết &rarr;</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar (5 tabs) -->
+    <nav class="bottom-nav">
+      <ul class="bottom-nav-list">
+        <li class="bottom-nav-item">
+          <a href="index.html" class="bottom-nav-link" data-page="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Trang chủ</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="chat.html" class="bottom-nav-link" data-page="chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Trò chuyện</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="checkin.html" class="bottom-nav-link" data-page="checkin">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span>Check-in</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="healing.html" class="bottom-nav-link active" data-page="healing">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+              <line x1="9" y1="9" x2="9.01" y2="9"></line>
+              <line x1="15" y1="9" x2="15.01" y2="9"></line>
+            </svg>
+            <span>Góc nhỏ</span>
+          </a>
+        </li>
+        <li class="bottom-nav-item">
+          <a href="profile.html" class="bottom-nav-link" data-page="profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Hồ sơ</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- ES Modules -->
+  <script type="module">
+    import { initNavigation } from './js/navigation.js';
+    import { initHealingPage } from './js/healing.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initNavigation('healing');
+      initHealingPage();
+    });
+  </script>
+</body>
+</html>

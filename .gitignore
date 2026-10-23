@@ -1,0 +1,23 @@
+# Environment variables (Never commit secret API keys)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Node modules & logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel deployment artifacts
+.vercel/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# IDE specific files
+.vscode/
+.idea/

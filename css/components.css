@@ -1,0 +1,472 @@
+/* ==========================================================================
+   SERENEBLOOM - CORE INTERACTIVE COMPONENTS
+   ========================================================================== */
+
+/* 1. Mood Selector Grid / Chips */
+.mood-selector {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+}
+
+.mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 0.5rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  user-select: none;
+  text-align: center;
+}
+
+.mood-option:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-sage);
+  background: var(--color-mint-light);
+}
+
+.mood-option.selected {
+  border-color: var(--color-sage);
+  background: var(--color-mint);
+  box-shadow: 0 4px 12px rgba(102, 139, 123, 0.2);
+  transform: translateY(-2px);
+}
+
+.mood-emoji {
+  font-size: 1.75rem;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+
+.mood-option:hover .mood-emoji,
+.mood-option.selected .mood-emoji {
+  transform: scale(1.15);
+}
+
+.mood-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-main);
+}
+
+/* 2. Inspirational Quote Card */
+.quote-card {
+  background: linear-gradient(135deg, rgba(243, 221, 227, 0.45), rgba(226, 239, 233, 0.65));
+  border: 1px solid rgba(102, 139, 123, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 1.75rem 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.quote-content {
+  max-width: 650px;
+  position: relative;
+  z-index: 2;
+}
+
+.quote-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-sage-dark);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.quote-text {
+  font-family: var(--font-family-hand);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-main);
+  line-height: 1.45;
+  margin-bottom: 0.4rem;
+}
+
+.quote-author {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.quote-decoration {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  opacity: 0.85;
+  animation: floatSlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatSlow {
+  from { transform: translateY(0px) rotate(0deg); }
+  to { transform: translateY(-8px) rotate(4deg); }
+}
+
+/* 3. Journal Recent Items List */
+.journal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.journal-item {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.journal-item:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(102, 139, 123, 0.35);
+}
+
+.journal-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.journal-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.journal-date {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.journal-preview {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-main);
+  line-height: 1.55;
+  white-space: pre-line;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.journal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+/* 4. Guided Box Breathing Exercise */
+.breathing-box {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.breathing-visual-wrap {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 1.5rem auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breathing-outer-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px dashed rgba(102, 139, 123, 0.3);
+}
+
+.breathing-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-mint), var(--color-pink));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(102, 139, 123, 0.2);
+  transition: transform 4s ease-in-out;
+  color: var(--color-sage-dark);
+}
+
+.breathing-circle.inhale {
+  transform: scale(1.45);
+  box-shadow: 0 12px 36px rgba(243, 221, 227, 0.5);
+}
+
+.breathing-circle.hold {
+  transform: scale(1.45);
+}
+
+.breathing-circle.exhale {
+  transform: scale(1);
+}
+
+.breathing-circle.relax {
+  transform: scale(1);
+}
+
+.breathing-prompt {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.breathing-counter {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-hand);
+}
+
+/* 5. Balloon Release ("Thả bay muộn phiền") */
+.balloon-stage {
+  position: relative;
+  min-height: 380px;
+  background: linear-gradient(180deg, #EAF3FB 0%, #FAF8F3 100%);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.balloon-svg-wrap {
+  width: 100px;
+  height: 140px;
+  position: relative;
+  transition: transform 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 3.5s ease;
+  cursor: pointer;
+  filter: drop-shadow(0 8px 16px rgba(53, 67, 61, 0.15));
+}
+
+.balloon-svg-wrap.released {
+  transform: translateY(-450px) scale(0.3) rotate(8deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.balloon-message-box {
+  margin-top: 1.5rem;
+  max-width: 440px;
+  width: 100%;
+}
+
+.balloon-released-feedback {
+  display: none;
+  animation: fadeIn 0.8s ease forwards;
+  max-width: 480px;
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 6. Bloom Jigsaw Puzzle Component */
+.puzzle-wrapper {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.puzzle-selector-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.puzzle-theme-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.puzzle-pill {
+  padding: 0.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.puzzle-pill img {
+  display: block;
+  width: 5rem;
+  height: 3.75rem;
+  object-fit: cover;
+  border-radius: calc(var(--radius-md) - 2px);
+}
+
+.puzzle-pill.active {
+  border-color: var(--color-sage);
+  box-shadow: 0 0 0 2px var(--color-sage);
+}
+
+.puzzle-board-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.puzzle-grid {
+  width: 300px;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  background: var(--color-mint-light);
+  border: 3px solid var(--color-sage);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.puzzle-slot {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(102, 139, 123, 0.4);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.puzzle-slot.highlight {
+  background: var(--color-pink-light);
+  border-color: var(--color-sage);
+}
+
+.puzzle-tray {
+  width: 300px;
+  min-height: 300px;
+  background: var(--color-cream);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.puzzle-piece {
+  width: 90px;
+  height: 90px;
+  background-size: 300px 300px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.puzzle-piece:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+}
+
+.puzzle-piece.placed {
+  cursor: default;
+  box-shadow: none;
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.puzzle-progress-bar {
+  width: 100%;
+  height: 10px;
+  background: var(--color-mint-light);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.puzzle-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-sage), #8FC1AE);
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* 7. Emergency / Crisis Safety Banner */
+.crisis-banner {
+  background: #FFF7F0;
+  border: 1px solid #F6D6BA;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: var(--font-size-xs);
+  color: #8C4318;
+  margin-bottom: 1.25rem;
+}
+
+.crisis-banner strong {
+  color: #A03D00;
+}
+
+.crisis-banner a {
+  color: #A03D00;
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+}

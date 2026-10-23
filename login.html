@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng Nhập — SereneBloom</title>
+  <meta name="description" content="Đăng nhập tài khoản SereneBloom để theo dõi sức khỏe tinh thần và trò chuyện cùng AI.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.png">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages/auth.css">
+</head>
+<body class="auth-page">
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-brand-icon">
+        <img src="assets/images/logo.png" alt="SereneBloom" width="36" height="36">
+      </div>
+      <h1>Chào bạn trở lại</h1>
+      <p>Đăng nhập để tiếp tục hành trình chăm sóc tâm trí cùng SereneBloom.</p>
+    </div>
+
+    <form class="auth-form" id="login-form">
+      <div class="form-group">
+        <label for="login-email" class="form-label">Địa chỉ Email</label>
+        <div class="form-input-wrap">
+          <input 
+            type="email" 
+            id="login-email" 
+            placeholder="tenban@thpt.edu.vn" 
+            required 
+            autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-label">
+          <label for="login-password">Mật khẩu</label>
+          <a href="forgot-password.html" style="font-size: var(--font-size-xs); color: var(--color-sage);">Quên mật khẩu?</a>
+        </div>
+        <div class="form-input-wrap">
+          <input 
+            type="password" 
+            id="login-password" 
+            placeholder="••••••••" 
+            required 
+            autocomplete="current-password">
+          <button type="button" class="input-icon-btn toggle-pwd-btn" data-target="login-password" title="Hiện/ẩn mật khẩu">👁️</button>
+        </div>
+      </div>
+
+      <div class="form-row-between">
+        <label class="remember-check">
+          <input type="checkbox" id="login-remember" checked>
+          <span>Ghi nhớ đăng nhập</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="login-submit-btn" style="width: 100%; margin-top: 0.5rem;">
+        Đăng nhập
+      </button>
+
+      <div class="demo-account-box">
+        <p>💡 Thử nghiệm nhanh không cần gõ?</p>
+        <button type="button" class="btn btn-secondary btn-sm" id="quick-demo-login-btn">
+          Đăng nhập nhanh 1-chạm (Tài khoản mẫu)
+        </button>
+      </div>
+    </form>
+
+    <div class="auth-footer">
+      <span>Chưa có tài khoản? </span>
+      <a href="register.html" style="font-weight: 600; color: var(--color-sage-dark);">Đăng ký ngay &rarr;</a>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <!-- ES Modules -->
+  <script type="module">
+    import { initAuthPage } from './js/auth.js';
+    document.addEventListener('DOMContentLoaded', initAuthPage);
+  </script>
+</body>
+</html>

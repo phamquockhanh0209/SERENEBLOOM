@@ -1,0 +1,107 @@
+/* ==========================================================================
+   SERENEBLOOM - RESPONSIVE STYLES
+   ========================================================================== */
+
+/* Tablet & Mobile Screens (<= 992px) */
+@media (max-width: 992px) {
+  :root {
+    --sidebar-width: 0px;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+    display: none;
+  }
+
+  .main-wrapper {
+    margin-left: 0;
+  }
+
+  .bottom-nav {
+    display: block;
+  }
+
+  .page-content {
+    padding: 1.25rem 1rem;
+    padding-bottom: calc(var(--bottombar-height) + 2rem);
+  }
+
+  .topbar {
+    padding: 0 1rem;
+    height: 64px;
+  }
+
+  .mood-selector {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .quote-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.25rem;
+  }
+
+  .quote-decoration {
+    display: none;
+  }
+}
+
+/* Small Mobile Screens (<= 576px) */
+@media (max-width: 576px) {
+  html {
+    font-size: 15px;
+  }
+
+  .topbar-date {
+    display: none;
+  }
+
+  .card {
+    padding: 1.2rem;
+    border-radius: var(--radius-md);
+  }
+
+  .modal-container {
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .puzzle-board-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .puzzle-grid, .puzzle-tray {
+    width: 270px;
+    height: 270px;
+  }
+
+  .puzzle-piece {
+    width: 82px;
+    height: 82px;
+    background-size: 270px 270px;
+  }
+
+  .breathing-visual-wrap {
+    width: 200px;
+    height: 200px;
+  }
+
+  .breathing-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .journal-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .journal-actions {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+  }
+}

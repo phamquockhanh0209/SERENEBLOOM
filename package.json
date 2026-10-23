@@ -1,0 +1,21 @@
+{
+  "name": "serenebloom",
+  "version": "1.0.0",
+  "description": "Website chăm sóc sức khỏe tinh thần, theo dõi cảm xúc và trò chuyện cùng AI dành cho học sinh THPT.",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "npx serve -l 3000 .",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "mental-health",
+    "wellness",
+    "high-school",
+    "gemini-ai",
+    "firebase",
+    "vanilla-js"
+  ],
+  "author": "SereneBloom Team",
+  "license": "MIT"
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng Ký Tài Khoản — SereneBloom</title>
+  <meta name="description" content="Tạo tài khoản SereneBloom để bắt đầu hành trình chăm sóc sức khỏe tinh thần học đường.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.png">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages/auth.css">
+</head>
+<body class="auth-page">
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-brand-icon">
+        <img src="assets/images/logo.png" alt="SereneBloom" width="36" height="36">
+      </div>
+      <h1>Tạo tài khoản mới </h1>
+      <p>Một góc bình yên luôn rộng mở để đón nhận những cảm xúc của bạn.</p>
+    </div>
+
+    <form class="auth-form" id="register-form">
+      <div class="form-group">
+        <label for="register-name" class="form-label">Tên hoặc biệt danh của bạn</label>
+        <div class="form-input-wrap">
+          <input 
+            type="text" 
+            id="register-name" 
+            placeholder="Ví dụ: Ngọc Hân, Minh An..." 
+            required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="register-email" class="form-label">Địa chỉ Email</label>
+        <div class="form-input-wrap">
+          <input 
+            type="email" 
+            id="register-email" 
+            placeholder="tenban@thpt.edu.vn" 
+            required 
+            autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="register-password" class="form-label">Mật khẩu (Tối thiểu 6 ký tự)</label>
+        <div class="form-input-wrap">
+          <input 
+            type="password" 
+            id="register-password" 
+            placeholder="••••••••" 
+            required 
+            minlength="6"
+            autocomplete="new-password">
+          <button type="button" class="input-icon-btn toggle-pwd-btn" data-target="register-password" title="Hiện/ẩn mật khẩu">👁️</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="register-confirm-password" class="form-label">Xác nhận mật khẩu</label>
+        <div class="form-input-wrap">
+          <input 
+            type="password" 
+            id="register-confirm-password" 
+            placeholder="••••••••" 
+            required 
+            minlength="6"
+            autocomplete="new-password">
+          <button type="button" class="input-icon-btn toggle-pwd-btn" data-target="register-confirm-password" title="Hiện/ẩn mật khẩu">👁️</button>
+        </div>
+      </div>
+
+      <p style="font-size: 0.72rem; color: var(--color-text-muted); line-height: 1.4; margin-top: 0.25rem;">
+        Bằng việc đăng ký, bạn đồng ý tham gia không gian chăm sóc tinh thần an toàn, tôn trọng và không phán xét của SereneBloom.
+      </p>
+
+      <button type="submit" class="btn btn-primary" id="register-submit-btn" style="width: 100%; margin-top: 0.5rem;">
+        Tạo tài khoản
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <span>Đã có tài khoản? </span>
+      <a href="login.html" style="font-weight: 600; color: var(--color-sage-dark);">Đăng nhập ngay &rarr;</a>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <!-- ES Modules -->
+  <script type="module">
+    import { initAuthPage } from './js/auth.js';
+    document.addEventListener('DOMContentLoaded', initAuthPage);
+  </script>
+</body>
+</html>

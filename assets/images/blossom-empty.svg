@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+  <defs>
+    <linearGradient id="branchGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#668B7B" />
+      <stop offset="100%" stop-color="#40584D" />
+    </linearGradient>
+    <radialGradient id="petalGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#FCEAE4" />
+      <stop offset="100%" stop-color="#F3DDE3" />
+    </radialGradient>
+  </defs>
+
+  <!-- Soothing soft background aura -->
+  <circle cx="80" cy="80" r="64" fill="#E2EFE9" opacity="0.4" />
+  <circle cx="80" cy="80" r="50" fill="#FAF8F3" opacity="0.7" />
+
+  <!-- Organic Branch -->
+  <path d="M25 125 C50 115 65 95 90 92 C108 90 128 75 140 55" stroke="url(#branchGrad)" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M70 102 C82 82 100 84 110 75" stroke="url(#branchGrad)" stroke-width="3" stroke-linecap="round" />
+  <path d="M102 91 C115 105 125 106 135 108" stroke="url(#branchGrad)" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Cherry / Peach Blossom Flower 1 -->
+  <g transform="translate(90, 88)">
+    <circle cx="-8" cy="-5" r="7" fill="url(#petalGrad)" />
+    <circle cx="8" cy="-5" r="7" fill="url(#petalGrad)" />
+    <circle cx="-6" cy="7" r="7" fill="url(#petalGrad)" />
+    <circle cx="6" cy="7" r="7" fill="url(#petalGrad)" />
+    <circle cx="0" cy="-10" r="7" fill="url(#petalGrad)" />
+    <circle cx="0" cy="0" r="4" fill="#E8C587" />
+  </g>
+
+  <!-- Blossom Flower 2 -->
+  <g transform="translate(130, 60)">
+    <circle cx="-6" cy="-4" r="6" fill="url(#petalGrad)" />
+    <circle cx="6" cy="-4" r="6" fill="url(#petalGrad)" />
+    <circle cx="-5" cy="5" r="6" fill="url(#petalGrad)" />
+    <circle cx="5" cy="5" r="6" fill="url(#petalGrad)" />
+    <circle cx="0" cy="-8" r="6" fill="url(#petalGrad)" />
+    <circle cx="0" cy="0" r="3" fill="#E8C587" />
+  </g>
+
+  <!-- Tiny Buds & Floating Petals -->
+  <circle cx="112" cy="73" r="3.5" fill="#F3DDE3" />
+  <circle cx="136" cy="108" r="4" fill="#F3DDE3" />
+
+  <path d="M50 65 C45 60 48 50 56 52 C60 58 56 65 50 65 Z" fill="#F3DDE3" transform="rotate(-15 50 65)" opacity="0.85" />
+  <path d="M100 40 C95 36 98 28 104 30 C108 35 105 40 100 40 Z" fill="#F3DDE3" transform="rotate(25 100 40)" opacity="0.7" />
+  <path d="M40 90 C36 86 38 80 43 82 C46 86 44 90 40 90 Z" fill="#F3DDE3" opacity="0.6" />
+</svg>
