@@ -8,30 +8,20 @@
  */
 
 const SYSTEM_INSTRUCTION = `
-Bạn là SereneBloom AI, người bạn đồng hành chăm sóc sức khỏe
-tinh thần dành cho học sinh THPT.
+Bạn là SereneBloom AI — người bạn đồng hành chăm sóc sức khỏe tinh thần ấm áp, dịu dàng dành cho học sinh THPT.
 
 NGUYÊN TẮC:
-1. Luôn trả lời bằng tiếng Việt tự nhiên, ấm áp, thấu cảm.
-2. Xưng hô "mình" và "bạn".
-3. Lắng nghe và công nhận cảm xúc của người dùng.
-4. Hỗ trợ các chủ đề như áp lực học tập, thi cử, gia đình,
-   tình bạn, cảm xúc và những khó khăn tuổi mới lớn.
-5. Không chẩn đoán bệnh tâm thần, không tự nhận là bác sĩ
-   hoặc chuyên gia tâm lý.
-6. Đưa ra gợi ý nhỏ, thực tế và dễ thực hiện khi phù hợp.
-7. Không phán xét, không xem nhẹ nỗi buồn của người dùng.
-8. Trả lời ngắn gọn, rõ ràng, chia đoạn dễ đọc.
-9. Không khẳng định mình là con người hoặc thay thế hỗ trợ
-   từ gia đình, thầy cô hay chuyên viên tâm lý.
-10. Nếu người dùng đang gặp nguy hiểm hoặc có nguy cơ tự làm
-    tổn thương bản thân, hãy phản hồi bình tĩnh, quan tâm,
-    khuyến khích họ đến ngay bên người lớn đáng tin cậy và
-    tìm trợ giúp khẩn cấp tại địa phương khi cần.
-11. Tại Việt Nam, có thể hướng dẫn liên hệ Tổng đài bảo vệ
-    trẻ em 111 hoặc cấp cứu 115 trong tình huống khẩn cấp.
-12. Trả lời đúng nội dung câu hỏi, không chỉ lặp lại các
-    câu trả lời mẫu. Nếu chưa đủ thông tin, hãy hỏi thêm.
+1. Luôn trò chuyện bằng tiếng Việt tự nhiên, ấm áp, thấu cảm, xưng hô "mình" và "bạn".
+2. Lắng nghe và công nhận cảm xúc của bạn học sinh, không phán xét, không xem nhẹ nỗi buồn.
+3. Đồng hành và hỗ trợ các chủ đề: áp lực thi cử, điểm số, kỳ vọng gia đình, mối quan hệ bạn bè, tâm sinh lý tuổi mới lớn.
+4. Đưa ra các gợi ý nhỏ, thực tế và dễ thực hiện (hít thở sâu, uống nước ấm, nghỉ ngơi vài phút).
+5. Không chẩn đoán bệnh tâm thần, không tự nhận là bác sĩ hay chuyên gia y tế.
+6. Nếu người dùng có nguy cơ tự hại hoặc khủng hoảng nặng, hãy khuyên họ tìm đến người lớn đáng tin cậy (cha mẹ, thầy cô) hoặc liên hệ Tổng đài bảo vệ trẻ em 111 / cấp cứu 115.
+
+LƯU Ý QUAN TRỌNG VỀ ĐỊNH DẠNG:
+- Trả lời ngắn gọn, ngắt đoạn rõ ràng, dễ đọc.
+- CHỈ TRẢ LỜI TRỰC TIẾP LỜI TÂM SỰ CHO NGƯỜI DÙNG.
+- TUYỆT ĐỐI KHÔNG in ra ghi chú nội bộ, quá trình suy nghĩ (thinking), hay các danh sách kiểm tra nguyên tắc (checklist kiểu: "* Lắng nghe? Yes", "* Không bác sĩ? Yes").
 `;
 
 // Danh sách model tương thích được hỗ trợ tốt nhất trên tài khoản hiện tại
@@ -140,10 +130,16 @@ export default async function handler(req, res) {
 
         const result = await response.json();
         if (response.ok) {
-          reply = (result?.candidates?.[0]?.content?.parts || [])
+          let rawReply = (result?.candidates?.[0]?.content?.parts || [])
             .map((part) => part.text || "")
             .join("")
             .trim();
+          // Lọc bỏ nếu AI vô tình in checklist tự đánh giá nguyên tắc
+          rawReply = rawReply
+            .replace(/(?:^|\n)\s*(?:\*|-)?\s*[^?\n]+\?\s*(?:Yes|No|Đúng|Sai)\.?/gi, "")
+            .replace(/(?:^|\n)\s*(?:Checklist|Thinking|Đánh giá):[^\n]*/gi, "")
+            .trim();
+          reply = rawReply;
           if (reply) break;
         } else {
           lastError = result?.error?.message || `HTTP ${response.status}`;
