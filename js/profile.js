@@ -132,12 +132,12 @@ async function renderMoodChart(uid) {
           callbacks: {
             label: (ctx) => {
               const val = ctx.parsed.y;
-              if (val >= 4.5) return 'Tâm trạng: Rất vui 😄';
-              if (val >= 3.5) return 'Tâm trạng: Tốt 😊';
-              if (val >= 2.5) return 'Tâm trạng: Bình thường 😐';
-              if (val >= 1.8) return 'Tâm trạng: Mệt mỏi 🥱';
-              if (val >= 1.2) return 'Tâm trạng: Lo lắng 😰';
-              return 'Tâm trạng: Buồn 😢';
+              if (val >= 4.5) return 'Tâm trạng: Rất vui ';
+              if (val >= 3.5) return 'Tâm trạng: Tốt ';
+              if (val >= 2.5) return 'Tâm trạng: Bình thường ';
+              if (val >= 1.8) return 'Tâm trạng: Mệt mỏi ';
+              if (val >= 1.2) return 'Tâm trạng: Lo lắng ';
+              return 'Tâm trạng: Buồn ';
             }
           }
         }
@@ -149,11 +149,11 @@ async function renderMoodChart(uid) {
           ticks: {
             stepSize: 1,
             callback: (val) => {
-              if (val === 5) return '😄 Rất vui';
-              if (val === 4) return '😊 Tốt';
-              if (val === 3) return '😐 Bình thường';
-              if (val === 2) return '🥱 Mệt mỏi';
-              if (val === 1) return '😢 Buồn';
+              if (val === 5) return ' Rất vui';
+              if (val === 4) return ' Tốt';
+              if (val === 3) return ' Bình thường';
+              if (val === 2) return ' Mệt mỏi';
+              if (val === 1) return ' Buồn';
               return '';
             }
           },
@@ -189,12 +189,12 @@ function renderRecentJournalRecords(uid, checkins) {
   }
 
   const moodMap = {
-    joy: { label: 'Rất vui', badge: 'badge-mood-joy', emoji: '😄' },
-    good: { label: 'Tốt', badge: 'badge-mood-good', emoji: '😊' },
-    neutral: { label: 'Bình thường', badge: 'badge-mood-neutral', emoji: '😐' },
-    sad: { label: 'Buồn', badge: 'badge-mood-sad', emoji: '😢' },
-    anxious: { label: 'Lo lắng', badge: 'badge-mood-anxious', emoji: '😰' },
-    tired: { label: 'Mệt mỏi', badge: 'badge-mood-tired', emoji: '🥱' }
+    joy: { label: 'Rất vui', badge: 'badge-mood-joy', emoji: '' },
+    good: { label: 'Tốt', badge: 'badge-mood-good', emoji: '' },
+    neutral: { label: 'Bình thường', badge: 'badge-mood-neutral', emoji: '' },
+    sad: { label: 'Buồn', badge: 'badge-mood-sad', emoji: '' },
+    anxious: { label: 'Lo lắng', badge: 'badge-mood-anxious', emoji: '' },
+    tired: { label: 'Mệt mỏi', badge: 'badge-mood-tired', emoji: '' }
   };
 
   container.innerHTML = checkins.slice(0, 5).map(item => {
@@ -285,8 +285,19 @@ function openEditProfileModal(user) {
 }
 
 function formatShortDate(dateStr) {
-  if (!dateStr) return '';
-  const d = new Date(dateStr);
+  if (!dateStr || typeof dateStr !== 'string') return '';
+  const value = dateStr.trim();
+  if (!value) return '';
+
+  const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+  if (isoDate.test(value)) {
+    const [year, month, day] = value.split('-').map(Number);
+    if (!year || !month || !day) return '';
+    return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${year}`;
+  }
+
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return '';
   return `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getFullYear()}`;
 }
 

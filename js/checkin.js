@@ -99,12 +99,12 @@ export async function initCheckinPage() {
 }
 
 const MOOD_DATA = {
-  joy: { label: 'Rất vui', badge: 'badge-mood-joy', emoji: '😄' },
-  good: { label: 'Tốt', badge: 'badge-mood-good', emoji: '😊' },
-  neutral: { label: 'Bình thường', badge: 'badge-mood-neutral', emoji: '😐' },
-  sad: { label: 'Buồn', badge: 'badge-mood-sad', emoji: '😢' },
-  anxious: { label: 'Lo lắng', badge: 'badge-mood-anxious', emoji: '😰' },
-  tired: { label: 'Mệt mỏi', badge: 'badge-mood-tired', emoji: '🥱' }
+  joy: { label: 'Rất vui', badge: 'badge-mood-joy', emoji: '' },
+  good: { label: 'Tốt', badge: 'badge-mood-good', emoji: '' },
+  neutral: { label: 'Bình thường', badge: 'badge-mood-neutral', emoji: '' },
+  sad: { label: 'Buồn', badge: 'badge-mood-sad', emoji: '' },
+  anxious: { label: 'Lo lắng', badge: 'badge-mood-anxious', emoji: '' },
+  tired: { label: 'Mệt mỏi', badge: 'badge-mood-tired', emoji: '' }
 };
 
 async function renderJournalList(uid) {
@@ -388,8 +388,19 @@ function initMoodCanvas() {
 }
 
 function formatFullDate(dateStr) {
-  if (!dateStr) return '';
-  const d = new Date(dateStr);
+  if (!dateStr || typeof dateStr !== 'string') return '';
+  const value = dateStr.trim();
+  if (!value) return '';
+
+  const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+  if (isoDate.test(value)) {
+    const [year, month, day] = value.split('-').map(Number);
+    if (!year || !month || !day) return '';
+    return `${String(day).padStart(2, '0')}/${String(month).padStart(2, '0')}/${year}`;
+  }
+
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return '';
   const day = d.getDate().toString().padStart(2, '0');
   const month = (d.getMonth() + 1).toString().padStart(2, '0');
   const year = d.getFullYear();

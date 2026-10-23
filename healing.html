@@ -125,74 +125,11 @@
         <!-- Horizontal Category Filter Navigation -->
         <div class="category-filter-nav">
           <button class="category-tab active" data-category="all">Tất cả</button>
-          <button class="category-tab" data-category="jigsaw">Ghép tranh</button>
           <button class="category-tab" data-category="breathing">Thư giãn</button>
           <button class="category-tab" data-category="selfcare">Chăm sóc bản thân</button>
-          <button class="category-tab" data-category="psychology">Kiến thức tâm lý</button>
         </div>
 
         <div class="healing-sections">
-          <!-- SECTION 1: Bloom Jigsaw Mini-Game -->
-          <section class="healing-section" data-category="jigsaw">
-            <div class="section-heading">
-              <h2>Bloom Jigsaw — Ghép tranh chữa lành</h2>
-              <span class="badge badge-mint">Mini-game tương tác</span>
-            </div>
-
-            <div class="puzzle-wrapper">
-              <div class="puzzle-selector-bar">
-                <div class="puzzle-theme-pills">
-                  <span style="font-size: var(--font-size-xs); font-weight: 600; margin-right: 0.5rem; align-self: center;">Chọn tranh:</span>
-                  <button class="puzzle-pill active" data-theme="puzzle-1" aria-label="Hồ Sen Yên Bình" title="Hồ Sen Yên Bình">
-                    <img src="assets/images/hosen.webp" alt="Hồ Sen Yên Bình">
-                  </button>
-                  <button class="puzzle-pill" data-theme="puzzle-2" aria-label="Đồi Hoa Hoàng Hôn" title="Đồi Hoa Hoàng Hôn">
-                    <img src="assets/images/doihoa.jpg" alt="Đồi Hoa Hoàng Hôn">
-                  </button>
-                  <button class="puzzle-pill" data-theme="puzzle-3" aria-label="Góc Đọc Sách" title="Góc Đọc Sách">
-                    <img src="assets/images/gocdocsach.jpg" alt="Góc Đọc Sách">
-                  </button>
-                </div>
-
-                <button class="btn btn-secondary btn-sm" id="puzzle-reset-btn">
-                  <span>🔄</span> Chơi lại / Xáo mảnh
-                </button>
-              </div>
-
-              <!-- Progress Bar -->
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: var(--font-size-xs); margin-bottom: 0.35rem; color: var(--color-text-muted);">
-                  <span>Tiến trình ghép:</span>
-                  <span id="puzzle-progress-text" style="font-weight: 600; color: var(--color-sage-dark);">0/9 mảnh đã hoàn thành</span>
-                </div>
-                <div class="puzzle-progress-bar">
-                  <div class="puzzle-progress-fill" id="puzzle-progress-fill"></div>
-                </div>
-              </div>
-
-              <!-- Celebration Toast on complete -->
-              <div id="puzzle-celebration" style="display: none; background: #EAF6EE; border: 1.5px solid var(--color-success); border-radius: var(--radius-md); padding: 1rem; text-align: center; color: var(--color-success);">
-                <h3 style="margin-bottom: 0.25rem;">Tuyệt vời! Bạn đã hoàn thành bức tranh</h3>
-                <p style="font-size: var(--font-size-xs);">Hy vọng khoảnh khắc tập trung nhẹ nhàng này đã giúp tâm trí bạn được thư thái hơn.</p>
-              </div>
-
-              <!-- Board and Tray Container -->
-              <div class="puzzle-board-container">
-                <!-- Target 3x3 Grid -->
-                <div>
-                  <div style="text-align: center; font-size: var(--font-size-xs); font-weight: 600; margin-bottom: 0.5rem; color: var(--color-text-muted);">Khung ghép (Thả vào đây)</div>
-                  <div class="puzzle-grid" id="puzzle-grid"></div>
-                </div>
-
-                <!-- Tray containing scrambled pieces -->
-                <div>
-                  <div style="text-align: center; font-size: var(--font-size-xs); font-weight: 600; margin-bottom: 0.5rem; color: var(--color-text-muted);">Khay mảnh ghép (Kéo thả vào khung)</div>
-                  <div class="puzzle-tray" id="puzzle-tray"></div>
-                </div>
-              </div>
-            </div>
-          </section>
-
           <!-- SECTION 2: Guided Box Breathing -->
           <section class="healing-section" data-category="breathing">
             <div class="section-heading">
@@ -273,48 +210,6 @@
             </div>
           </section>
 
-          <!-- SECTION 4: Psychology Knowledge -->
-          <section class="healing-section" data-category="psychology">
-            <div class="section-heading">
-              <h2>Góc nhìn tâm lý học đường</h2>
-              <span class="badge badge-mint">Kiến thức thân thiện</span>
-            </div>
-
-            <div class="articles-grid">
-              <!-- Article 1 -->
-              <div class="article-card">
-                <div class="article-cover"><img src="assets/images/kvong.jpg" alt="Kỳ vọng trong học tập"></div>
-                <div class="article-body">
-                  <span class="article-tag">Thi cử & Kỳ vọng</span>
-                  <h3 class="article-title">Vượt qua áp lực thi cử và kỳ vọng gia đình</h3>
-                  <p class="article-snippet">Điểm số quan trọng, nhưng bạn còn quý giá hơn nhiều. Cùng tìm hiểu cách xây dựng ranh giới an toàn cho tâm lý trước mùa thi.</p>
-                  <span class="article-read-btn" data-article-id="art-1">Đọc bài viết &rarr;</span>
-                </div>
-              </div>
-
-              <!-- Article 2 -->
-              <div class="article-card">
-                <div class="article-cover"><img src="assets/images/apluc.jpg" alt="Áp lực và cảm xúc tuổi học trò"></div>
-                <div class="article-body">
-                  <span class="article-tag">Khoa học não bộ</span>
-                  <h3 class="article-title">Hiểu về cơn bão cảm xúc tuổi 17</h3>
-                  <p class="article-snippet">Vì sao đôi khi bạn thấy mình dễ nổi cáu hay buồn vu vơ? Khám phá cách bộ não tuổi mới lớn đang tái cấu trúc và thích nghi.</p>
-                  <span class="article-read-btn" data-article-id="art-2">Đọc bài viết &rarr;</span>
-                </div>
-              </div>
-
-              <!-- Article 3 -->
-              <div class="article-card">
-                <div class="article-cover"><img src="assets/images/5ngon.webp" alt="Kỹ thuật định tâm 5 ngón tay"></div>
-                <div class="article-body">
-                  <span class="article-tag">Chánh niệm thực hành</span>
-                  <h3 class="article-title">5 phút chánh niệm giải tỏa căng thẳng trước giờ kiểm tra</h3>
-                  <p class="article-snippet">Kỹ thuật định tâm 5 ngón tay giúp ổn định nhịp tim, lấy lại sự tập trung và giảm bớt cảm giác run sợ khi nhận đề thi.</p>
-                  <span class="article-read-btn" data-article-id="art-3">Đọc bài viết &rarr;</span>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
       </main>
     </div>
